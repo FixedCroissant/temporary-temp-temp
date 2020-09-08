@@ -18,20 +18,20 @@ cache:
 
 npm:
  stage: build
- cache:
-    key: ${CI_COMMIT_REF_SLUG}-npm
-    paths:
-      - node_modules/
-script:
+ script:
   - npm install
   - npm run production
-    
-artifacts:
+
+ artifacts:
   expire_in: 1 month
   paths:
       - node_modules/
       - public/css/
       - public/js/
+cache:
+   key: ${CI_COMMIT_REF_SLUG}-npm
+   paths:
+      - node_modules/
 
 
 testing:php:
