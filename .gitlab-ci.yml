@@ -3,7 +3,7 @@ image: edbizarro/gitlab-ci-pipeline-php:7.3
 composer:
  stage: build
  script:
- - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-sci
+ - composer install --prefer-dist --no-ansi --no-interaction --no-progress
  - cp .env.example .env
  - php artisan key:generate
  artifacts:
