@@ -1,27 +1,42 @@
-stages:
-  - testing
-  - build 
+image: edbizarro/gitlab-ci-pipeline-php:7.3
 
+composer:
+ stage: build
+ script:
+ - composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-sci
+ - cp .env.example .env
+ - php artisan key:generate
+ artifacts:
+   expire_in: 1 month
+   paths:    
+     - vendor/
+     - .env
 cache:
-  untracked: true
+    key: ${CI_COMMIT_REF_SLUG}-composer
+    paths:
+     - vendor/
+
+npm:
+ stage: build
+ cache:
+    key: ${CI_COMMIT_REF_SLUG}-npm
+    paths:
+      - node_modules/
+script:
+  - npm install
+  - npm run production
+    
+artifacts:
+  expire_in: 1 month
   paths:
-    - node_modules/
-    - vendor/
+      - node_modules/
+      - public/css/
+      - public/js/
+
 
 testing:php:
-  image: edbizarro/gitlab-ci-pipeline-php:7.3
-  stage: testing
+  stage: test
+  dependencies:
+    - composer
   script:
-  - composer install
-  - ./vendor/bin/phpunit
-
-build:js: 
-  image: node:12
-  stage: build
-  script:
-  - npm install   
-  - npm run prod
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - public
+  - ./vendor/bin/phpunit --coverage-text --colors=never
