@@ -1,0 +1,27 @@
+stages:
+  - testing
+  - build 
+
+cache:
+  untracked: true
+  paths:
+    - node_modules/
+    - vendor/
+
+testing:php:
+  image: edbizarro/gitlab-ci-pipeline-php:7.3
+  stage: testing
+  script:
+  - composer install
+  - ./vendor/bin/phpunit
+
+build:js: 
+  image: node:12
+  stage: build
+  script:
+  - npm install   
+  - npm run prod
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - public
