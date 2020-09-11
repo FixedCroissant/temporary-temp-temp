@@ -46,6 +46,7 @@ cache:
 
 deploy:
  stage: deploy
+ image: php:7.4-alpine
  dependencies:
    - build:js
  script:
