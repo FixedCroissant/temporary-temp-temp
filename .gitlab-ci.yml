@@ -1,11 +1,13 @@
-image: edbizarro/gitlab-ci-pipeline-php:7.3
+stages:
+  - test
+  - build
+  - deploy
 
-composer:
- stage: build
+test:php:
+ image: edbizarro/gitlab-ci-pipeline-php:7.3 
+ stage: test
  script:
  - composer install --prefer-dist --no-ansi --no-interaction --no-progress
- - cp .env.example .env
- - php artisan key:generate
  artifacts:
    expire_in: 1 month
    paths:    
@@ -16,14 +18,15 @@ cache:
     paths:
      - vendor/
 
-npm:
+build:js:
+ image: node:12
  stage: build
  script:
   - npm install
   - npm run production
 
  artifacts:
-  expire_in: 1 month
+  expire_in: 1 week
   paths:
       - node_modules/
       - public/css/
@@ -33,10 +36,20 @@ cache:
    paths:
       - node_modules/
 
+.init_ssh: &init_ssh |
+  mkdir -p ~/.ssh
+  eval $(ssh-agent -s)
+  echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+  chmod 644 ~/.ssh/known_hosts
+  echo "${SSH_PRIVATE_KEY}" | tr -d '\r' | ssh-add - > /dev/null
 
-testing:php:
-  stage: test
-  dependencies:
-    - composer
-  script:
-  - ./vendor/bin/phpunit --coverage-text --colors=never
+
+deploy:
+ stage: deploy
+ dependencies:
+   - build:js
+ script:
+   - *init_ssh
+   - dep deploy production -vvv
+ only:
+   - master
