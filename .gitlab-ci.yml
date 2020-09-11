@@ -50,6 +50,6 @@ deploy:
    - build:js
  script:
    - *init_ssh
-   - dep deploy production -vvv
+   - ./vendor/bin/dep deploy production -vvv
  only:
    - master
