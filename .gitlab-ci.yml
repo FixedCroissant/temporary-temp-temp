@@ -49,8 +49,15 @@ deploy:
  image: roadiz/php74-runner
  dependencies:
    - build:js
+ before_script:
+ - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+ artifacts:
+   expire_in: 1 month
+   paths:    
+     - vendor/
+     - .env
  script:
    - *init_ssh
-   - php vendor/bin/dep deploy production -vvv
+   - php ./vendor/bin/dep deploy production -vvv
  only:
    - master
