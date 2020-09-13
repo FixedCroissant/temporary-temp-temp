@@ -8,7 +8,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="{{url('/css/app.css')}}" rel="stylesheet">
         <!-- Styles -->
         <style>
             html, body {
@@ -87,6 +87,7 @@
                 <div class="links">
                    <p>Demo application</p>
                    <p>Added line here. Tada!</p>
+                   <p class="fruitloop">Another line here!</p>
                 </div>
             </div>
         </div>
