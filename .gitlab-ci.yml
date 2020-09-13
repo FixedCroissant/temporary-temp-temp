@@ -51,6 +51,6 @@ deploy:
    - build:js
  script:
    - *init_ssh
-   - php ./vendor/bin/dep deploy production -vvv
+   - dep deploy production -vvv
  only:
    - master
