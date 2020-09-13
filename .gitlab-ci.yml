@@ -46,7 +46,7 @@ cache:
 
 deploy:
  stage: deploy
- image: php:7.4-alpine
+ image: roadiz/php74-runner
  dependencies:
    - build:js
  script:
