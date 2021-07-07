@@ -7,11 +7,9 @@ test:php:
  image: edbizarro/gitlab-ci-pipeline-php:7.3 
  stage: test
  before_script:
- - pecl install xdebug
- - docker-php-enable xdebug
  - composer install --prefer-dist --no-ansi --no-interaction --no-progress
  script:
-  - ./vendor/bin/phpunit --coverage-text --colors=never
+  - XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --colors=never
  
  artifacts:
    expire_in: 1 month
