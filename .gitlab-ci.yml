@@ -1,13 +1,19 @@
 stages:
-  - test
   - build
+  - test
   - deploy
+
+build:php:
+ image: edbizarro/gitlab-ci-pipeline-php:7.3
+ stage: build
+ script:
+ - composer install --prefer-dist --no-ansi --no-interaction --no-progress 
 
 test:php:
  image: edbizarro/gitlab-ci-pipeline-php:7.3 
  stage: test
  script:
- - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+ - phpunit --coverage-text --colors=never
  artifacts:
    expire_in: 1 month
    paths:    

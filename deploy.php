@@ -40,10 +40,10 @@ task('deploy:secrets', function () {
 set('allow_anonymous_stats', false);
 
 // Hosts
-host('production.app.com')    
-    ->hostname('142.93.241.53') 
+host(getenv('CI_HOST_NAME'))    
+    ->hostname(getenv('CI_HOST')) 
     ->stage('production')
-    ->user('deployer')
+    ->user(getenv('CI_USER'))
     ->set('deploy_path', '~/public_html/{{application}}');
 
 // Tasks
