@@ -9,6 +9,9 @@ test:php:
  before_script:
  - composer install --prefer-dist --no-ansi --no-interaction --no-progress
  script:
+  # application set up 
+  - cp .env.example .env
+  - php artisan key:generate
   - XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --colors=never
  
  artifacts:
