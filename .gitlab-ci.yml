@@ -64,6 +64,7 @@ deploy:
      - .env
  script:
    - *init_ssh
-   - php ./vendor/bin/dep deploy production -vvv    
+   - php ./vendor/bin/dep deploy production -vvv
+   - php ./vendor/bin/dep reset-service    
  only:
    - master
