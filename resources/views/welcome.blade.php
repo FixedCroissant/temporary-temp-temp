@@ -87,8 +87,7 @@
                 <div class="links">
                    <p>Demo application</p>
                    <p>Added line here. Tada!</p>
-                   <p class="fruitloop">Another line here!</p>
-                   <p>Another line right here.</p>
+                   <p>Hello text!</p>
                 </div>
             </div>
         </div>
