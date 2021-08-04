@@ -64,7 +64,6 @@ deploy:
      - .env
  script:
    - *init_ssh
-   - php ./vendor/bin/dep deploy production -vvv
-   - php ./vendor/bin/dep run 'sudo /bin/systemctl restart php7.4-fpm' 
+   - php ./vendor/bin/dep deploy production -vvv    
  only:
    - master
