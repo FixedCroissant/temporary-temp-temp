@@ -69,3 +69,9 @@ task('deploy', [
     'cleanup',
 ]);
 
+//Reset the php service, only neccessary when running multiple version of PHP within VM.
+desc('Rerun the php service.');
+task('reset-service', function(){
+  run('sudo /bin/systemctl restart php7.4-fpm');
+  writeln('Restarted the PHP service on the remote host.');
+});
