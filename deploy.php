@@ -7,6 +7,8 @@ require 'recipe/rsync.php';
 
 // Project name
 set('application', getenv('CI_PROJECT_NAME'));
+//Default host.
+set('default_stage','production');
 
 set('ssh_multiplexing',true);
 set('use_relative_symlinks', false);
