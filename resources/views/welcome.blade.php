@@ -87,7 +87,7 @@
                 <div class="links">
                    <p>Demo application</p>
                    <p>Added line here. Tada!</p>
-                   <p class="fruitloop">Somebody!</p>
+                   <img src="https://placekitten.com/500/800" alt="cat">
                 </div>
             </div>
         </div>
