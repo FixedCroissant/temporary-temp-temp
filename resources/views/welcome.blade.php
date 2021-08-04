@@ -87,7 +87,8 @@
                 <div class="links">
                    <p>Demo application</p>
                    <p>Added line here. Tada!</p>
-                   <img src="https://placekitten.com/500/800" alt="cat">
+                   <p>Another cat below....</p>
+                   <img src="https://placekitten.com/450/900" alt="cat">
                 </div>
             </div>
         </div>
